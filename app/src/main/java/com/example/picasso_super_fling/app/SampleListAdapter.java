@@ -1,7 +1,6 @@
 package com.example.picasso_super_fling.app;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import java.util.List;
 public class SampleListAdapter extends BaseAdapter {
     private final Context context;
     private final List<String> urls = new ArrayList<String>();
-    private final int LARGE_SIZE = 1000;
+    private final int LARGE_SIZE = 1200;
     private boolean loadImages = true;
 
     public SampleListAdapter(Context context) {
@@ -26,19 +25,11 @@ public class SampleListAdapter extends BaseAdapter {
         Collections.addAll(urls, Data.URLS);
     }
 
-    public void stopLoading() {
-        loadImages = false;
-        this.notifyDataSetChanged();
-        Log.d("SCROLL", "Loading Stopped...");
-    }
-
-    public void restartLoading() {
-        if (!loadImages) {
-            // Refresh the ListView elements
+    public void enableLoading(boolean b) {
+        if (!loadImages || !b) {
             this.notifyDataSetChanged();
-            loadImages = true;
-            Log.d("SCROLL", "Loading Restarted...");
         }
+        loadImages = b;
     }
 
     @Override
@@ -58,7 +49,7 @@ public class SampleListAdapter extends BaseAdapter {
 
         holder.text.setText(position + " " + holder.url);
         if (loadImages) {
-            // Load the image from the specified url
+            // Normal loading procedure
             Picasso.with(context)
                     .load(holder.url)
                     .resize(LARGE_SIZE, LARGE_SIZE)
