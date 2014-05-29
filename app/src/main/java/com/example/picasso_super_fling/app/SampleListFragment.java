@@ -30,7 +30,6 @@ public class SampleListFragment extends ListFragment {
         this.setListAdapter(adapter);
     }
 
-
     public void onStart() {
         super.onStart();
 
@@ -39,6 +38,7 @@ public class SampleListFragment extends ListFragment {
         lv = this.getListView();
         adapter = (SampleListAdapter) lv.getAdapter();
 
+        // Set GestureListener to handle fling events
         final GestureDetector gestureDetector = new GestureDetector(context, new FlingGestureDetector());
         View.OnTouchListener gestureListener = new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
@@ -54,14 +54,11 @@ public class SampleListFragment extends ListFragment {
                     adapter.enableLoading(true);
                 }
             }
-
             @Override
             public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
             }
         });
-
     }
-
 
     // Custom Gesture detector to handle fling events
     private class FlingGestureDetector implements GestureDetector.OnGestureListener {

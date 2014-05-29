@@ -44,9 +44,7 @@ public class SampleListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) view.getTag();
         }
-
         holder.url = getItem(position);
-
         holder.text.setText(position + " " + holder.url);
         if (loadImages) {
             // Normal loading procedure
@@ -87,5 +85,4 @@ public class SampleListAdapter extends BaseAdapter {
         TextView text;
         String url;
     }
-
 }
