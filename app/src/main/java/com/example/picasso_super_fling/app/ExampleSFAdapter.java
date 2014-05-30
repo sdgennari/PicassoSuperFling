@@ -46,7 +46,7 @@ public class ExampleSFAdapter extends SuperFlingBaseAdapter {
         // Configure the normal request that will display when the image loads
         RequestCreator normalRequest = Picasso.with(context)
                 .load(holder.url)
-                .resize(LARGE_SIZE, LARGE_SIZE)
+                .resize(LARGE_SIZE, LARGE_SIZE)         // Scale to make image larger and harder to load (for testing)
                 .placeholder(R.drawable.placeholder);
 
         // Call the SuperFlingBaseAdapter to decide which image to load

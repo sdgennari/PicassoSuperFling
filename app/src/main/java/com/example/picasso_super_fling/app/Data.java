@@ -8,6 +8,7 @@ final class Data {
     static final String BASE = "http://i.imgur.com/";
     static final String EXT = ".jpg";
 
+    // Large images found online at imgur.com
     static final String[] URLS = {
             BASE + "CqmBjo5" + EXT, BASE + "zkaAooq" + EXT, BASE + "0gqnEaY" + EXT,
             BASE + "9gbQ7YR" + EXT, BASE + "aFhEEby" + EXT, BASE + "0E2tgV7" + EXT,
