@@ -4,5 +4,6 @@
     <string name="app_name">picasso-super-fling</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="sf_listview">SuperFling ListView</string>
 
 </resources>

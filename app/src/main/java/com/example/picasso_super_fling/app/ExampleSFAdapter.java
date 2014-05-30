@@ -1,8 +1,6 @@
 package com.example.picasso_super_fling.app;
 
 import android.content.Context;
-import android.media.Image;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,7 @@ import java.util.List;
 public class ExampleSFAdapter extends SuperFlingBaseAdapter {
 
     private final List<String> urls = new ArrayList<String>();
-    private final int LARGE_SIZE = 1200;
+    private static final int LARGE_SIZE = 1200;     // For testing purposes
 
     public ExampleSFAdapter(Context context) {
         super(context);
@@ -28,20 +26,13 @@ public class ExampleSFAdapter extends SuperFlingBaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
+        // Standard ViewHolder pattern
         ViewHolder holder;
         if (view == null) {
-            /* Large single image
-            view = LayoutInflater.from(context).inflate(R.layout.sample_list_image_item, parent, false);
-            holder = new ViewHolder();
-            holder.image = (ImageView) view.findViewById(R.id.item_image);
-            holder.text = (TextView) view.findViewById(R.id.item_name);
-            view.setTag(holder);
-            */
-
-            /* Item with two images */
             view = LayoutInflater.from(context).inflate(R.layout.sample_list_dou_item, parent, false);
             holder = new ViewHolder();
-            holder.bg = (ImageView) view.findViewById(R.id.item_bg_image);
+            holder.bgImage = (ImageView) view.findViewById(R.id.item_bg_image);
+            holder.bgText = (TextView) view.findViewById(R.id.item_bg_text);
             holder.image = (ImageView) view.findViewById(R.id.item_image);
             holder.text = (TextView) view.findViewById(R.id.item_name);
             view.setTag(holder);
@@ -49,7 +40,8 @@ public class ExampleSFAdapter extends SuperFlingBaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         holder.url = getItem(position);
-        holder.text.setText(position + " " + holder.url);
+        holder.text.setText(holder.url);
+        holder.bgText.setText(String.valueOf(position));
 
         // Configure the normal request that will display when the image loads
         RequestCreator normalRequest = Picasso.with(context)
@@ -57,16 +49,9 @@ public class ExampleSFAdapter extends SuperFlingBaseAdapter {
                 .resize(LARGE_SIZE, LARGE_SIZE)
                 .placeholder(R.drawable.placeholder);
 
-        // Configure the placeholder request that will display when the user flings the list
-        // For best results, set the same resource as the the image and placeholder
-        RequestCreator placeholderRequest = Picasso.with(context)
-                .load(R.drawable.placeholder)
-                .resize(LARGE_SIZE, LARGE_SIZE)
-                .placeholder(R.drawable.placeholder);
-
         // Call the SuperFlingBaseAdapter to decide which image to load
-        processImageView(normalRequest, placeholderRequest, holder.image);
-        processImageView(normalRequest, placeholderRequest, holder.bg);
+        processImageView(view, normalRequest, R.drawable.placeholder, holder.image);
+        processImageView(view, normalRequest, R.drawable.placeholder, holder.bgImage);
 
         return view;
     }
@@ -85,8 +70,9 @@ public class ExampleSFAdapter extends SuperFlingBaseAdapter {
     }
 
     class ViewHolder {
-        ImageView bg;
+        ImageView bgImage;
         ImageView image;
+        TextView bgText;
         TextView text;
         String url;
     }

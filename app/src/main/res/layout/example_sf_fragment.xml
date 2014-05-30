@@ -4,9 +4,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="30dp"
+        android:background="#FF333333"
+        android:text="@string/sf_listview"
+        android:textColor="#FF777777"
+        android:gravity="center"/>
+
     <com.example.picasso_super_fling.app.SuperFlingListView
         android:id="@+id/sf_listview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="5" />
 
 </LinearLayout>

@@ -33,6 +33,7 @@ public class ExampleSFFragment extends Fragment {
         sfListView = (SuperFlingListView) parent.findViewById(R.id.sf_listview);
         sfListView.setAdapter(new ExampleSFAdapter(context));
 
+        // Set a generic OnItemClickListener to show that touch events still occur on the list
         sfListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
